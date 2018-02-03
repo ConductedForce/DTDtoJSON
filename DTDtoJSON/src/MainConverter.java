@@ -23,7 +23,6 @@ public class MainConverter {
 			case 0: printf("no args"); //no args
 				break;
 			case 1: // file path only
-				
 				break;
 			case 2: // file path + arg
 				
@@ -42,11 +41,11 @@ public class MainConverter {
 		switch(arg){
 		case 'p':
 			argType = "p";
-			result = verifyPath(path) ? true : false;
+			result = verifyPath(path);
 			break;
 		case 'd':
 			argType = "d";
-			result = verifyPath(path) ? true : false;
+			result = verifyPath(path);
 			break;
 		}
 		return result;
@@ -65,4 +64,7 @@ public class MainConverter {
 		return false;
 	}
 
+	public static void convert(String path){
+		
+	}
 }
