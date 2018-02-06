@@ -4,8 +4,8 @@ public class JSONelement {
 	private String JSONmessage = "";
 	
 	public JSONelement (String name, String message){
-		JSONname = name;
-		JSONmessage = message;
+		this.JSONname = name;
+		this.JSONmessage = message;
 	}
 	
 	public static JSONelement buildElement(String name, String message){
