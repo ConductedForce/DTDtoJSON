@@ -11,16 +11,19 @@ public class MainConverter {
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		
 		//read args
 		// autodetects if path or file
 		// always, takes file path, reads file, converts, saves to new file
+		boolean result = false;
 		switch (args.length){
 			case 0: printf("no args"); //no args
 				break;
-			case 1: verifyPath(args[0]);// file path only
+			case 1: 
+				result = verifyPath(args[1]); // file path only
 				break;
 		}
+		if ( !result )
+			printf("Failed");
 	}
 	
 	public static void printf( String message ){
@@ -34,6 +37,7 @@ public class MainConverter {
 			return true;
 		}
 		if (file.exists()){
+			JSONfile.buildFile(path, file.getName());
 			return true;
 		}
 		return false;
