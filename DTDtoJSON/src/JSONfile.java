@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSONfile {
-	private ArrayList<JSONelement> JSONelements = null;
+	private ArrayList<JSONelement> JSONelements = new ArrayList<JSONelement>();
 	private String JSONcompleteString = "";
 	private String fileName = "";
 	
@@ -15,8 +15,8 @@ public class JSONfile {
 	}
 	
 	public JSONfile(String path, String name) throws IOException{
-		this(JSONify(path));
-		this.fileName = name;
+		this(JSONify(path + "\\" + name));
+		this.fileName = name.substring(0, name.length()-4)+".json";
 	}
 	
 	public static JSONfile buildFile( String path, String name ) throws IOException{
@@ -24,39 +24,40 @@ public class JSONfile {
 	}
 	
 	private static ArrayList<JSONelement> JSONify(String path) throws IOException{
-		ArrayList<JSONelement> readElements = null;
-		FileReader frdr = null;
+		ArrayList<JSONelement> readElements = new ArrayList<JSONelement>();
 		BufferedReader rdr = null;
 		try {
-			frdr = new FileReader(path);
-			rdr = new BufferedReader(frdr);
+			rdr = new BufferedReader(new FileReader(path));
 			
 		    String txtLine = "";
-		    while( frdr.ready() ){
+		    while( rdr.read() != -1 ){
 		    	txtLine = rdr.readLine();
 			    String[] line = txtLine.split(" ");
-			    
-			    readElements.add(JSONelement.buildElement(line[1], line[2]));
+			    String message = "";
+			    for (int i = 2; i<line.length; i++){
+			    	message += line[i] + " ";
+			    	if (i == line.length-1)
+			    		message = message.substring(1, message.length()-3);
+			    }
+			    if (line.length > 1)
+			    	readElements.add(JSONelement.buildElement(line[1], message));
 		    }
 		} catch (IOException e) {
 		    System.err.println("Caught IOException: " + e.getMessage());
 		} finally {
 			rdr.close();
-			frdr.close();
 		}
 		return readElements;
 	}
 	
 	public void saveFile(String path) throws IOException{
 		stringify(this.JSONelements);
-		String fullPath = path+this.fileName;
+		String fullPath = path + "\\" + this.fileName;
 		
-		FileWriter frdr = null;
 		BufferedWriter rdr = null;
 		
 		try {
-			frdr = new FileWriter(fullPath);
-			rdr = new BufferedWriter(frdr);
+			rdr = new BufferedWriter(new FileWriter(fullPath));
 			
 		    rdr.write(this.JSONcompleteString);
 		    
@@ -64,18 +65,17 @@ public class JSONfile {
 		    System.err.println("Caught IOException: " + e.getMessage());
 		} finally {
 			rdr.close();
-			frdr.close();
 		}
 	}
 	
-	private String stringify(ArrayList<JSONelement> elements){
+	private void stringify(ArrayList<JSONelement> elements){
 		String result = "{\n";
 		for(int i = 0; i<elements.size(); i++){
 			result += elements.get(i).toString();
 		}
 		result += "}";
 		
-		return result;
+		this.JSONcompleteString = result;
 	}
 	
 	public String toString(){

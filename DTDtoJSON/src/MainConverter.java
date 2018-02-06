@@ -19,7 +19,7 @@ public class MainConverter {
 			case 0: printf("no args"); //no args
 				break;
 			case 1: 
-				result = verifyPath(args[1]); // file path only
+				result = verifyPath(args[0]); // file path only
 				break;
 		}
 		if ( !result )

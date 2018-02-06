@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSONfolder {
-	private static ArrayList<JSONfile> JSONfiles = null;
+	private static ArrayList<JSONfile> JSONfiles = new ArrayList<JSONfile>();
 	
 	private static File[] finder( String dirName){
         File dir = new File(dirName);

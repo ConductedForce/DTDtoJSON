@@ -16,6 +16,6 @@ public class JSONelement {
 		return "\t'" + JSONname + "': {\n" 
 				+ "\t  'message': '" + JSONmessage + "',\n"
 				+ "\t  'description': ''\n"
-				+ "\t},\n";
+				+ "\t},\n\n";
 	}
 }
