@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JSONfolder {
-	private ArrayList<JSONfile> JSONfiles = null;
-	private File[] fileNames = null;
+	private static ArrayList<JSONfile> JSONfiles = null;
 	
-	private File[] finder( String dirName){
+	private static File[] finder( String dirName){
         File dir = new File(dirName);
 
         return dir.listFiles(new FilenameFilter() { 
@@ -17,8 +16,8 @@ public class JSONfolder {
 
     }
 	
-	public void buildFiles( String dirPath ) throws IOException{
-		fileNames = finder( dirPath );
+	public static void buildFiles( String dirPath ) throws IOException{
+		File[] fileNames = finder( dirPath );
 		
 		for ( int i = 0; i< fileNames.length; i++){
 			String fileName = fileNames[i].getName();
@@ -28,7 +27,7 @@ public class JSONfolder {
 		saveFiles(dirPath);
 	}
 	
-	private void saveFiles(String dirPath) throws IOException{
+	private static void saveFiles(String dirPath) throws IOException{
 		for(int i = 0; i<JSONfiles.size(); i++){
 			JSONfiles.get(i).saveFile(dirPath);
 		}
