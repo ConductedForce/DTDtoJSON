@@ -15,14 +15,17 @@ public class MainConverter {
 		// autodetects if path or file
 		// always, takes file path, reads file, converts, saves to new file
 		boolean result = false;
+		boolean hasRun = false;
+		
 		switch (args.length){
 			case 0: printf("no args"); //no args
 				break;
 			case 1: 
 				result = verifyPath(args[0]); // file path only
+				hasRun = true;
 				break;
 		}
-		if ( !result )
+		if ( !result && hasRun)
 			printf("Failed");
 	}
 	
