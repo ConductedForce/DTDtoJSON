@@ -13,9 +13,9 @@ public class JSONelement {
 	}
 	
 	public String toString(){
-		return "\t'" + JSONname + "': {\n" 
+		return "\n\t'" + JSONname + "': {\n" 
 				+ "\t  'message': '" + JSONmessage + "',\n"
 				+ "\t  'description': ''\n"
-				+ "\t},\n\n";
+				+ "\t}";
 	}
 }

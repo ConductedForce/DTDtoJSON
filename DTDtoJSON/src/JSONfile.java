@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class JSONfile {
 	private ArrayList<JSONelement> JSONelements = new ArrayList<JSONelement>();
 	private String JSONcompleteString = "";
-	private String fileName = "";
+	private String fileName = "messages.json";
 	
 	private JSONfile(ArrayList<JSONelement> elements){
 		this.JSONelements = elements;
@@ -16,7 +16,6 @@ public class JSONfile {
 	
 	public JSONfile(String path, String name) throws IOException{
 		this(JSONify(path + "\\" + name));
-		this.fileName = name.substring(0, name.length()-4)+".json";
 	}
 	
 	public static JSONfile buildFile( String path, String name ) throws IOException{
@@ -68,10 +67,19 @@ public class JSONfile {
 		}
 	}
 	
+	public ArrayList<JSONelement> getElements(){
+		return this.JSONelements;
+	}
+	
 	private void stringify(ArrayList<JSONelement> elements){
 		String result = "{\n";
 		for(int i = 0; i<elements.size(); i++){
 			result += elements.get(i).toString();
+			if ( i == elements.size()-1){
+				result += "\n\n";
+			} else {
+				result += ",\n\n";
+			}
 		}
 		result += "}";
 		
